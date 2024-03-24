@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "Trips")
+@Table(name = "trips")
 
 public class Trip {
     @Id
@@ -15,12 +15,12 @@ public class Trip {
     private Long id;
 
     @Column (name = "trip_from", nullable = false)
-    private String from; // czy tutaj bedzie id
+    private String tripFrom; // czy tutaj bedzie id
 //    skąd (Miasto, Lotnisko)
 //    dokąd (Miasto, Hotel, Lotnisko)
 
     @Column (name = "trip_to", nullable = false)
-    private String to; // czy tutaj bedzie id
+    private String tripTo; // czy tutaj bedzie id
 
     @Column (name = "departure_date", nullable = false)
     private LocalDate departureDate;
@@ -47,7 +47,6 @@ public class Trip {
     private Integer numberOfSpotsForAdults;
     @Column (name = "number_of_spots_for_kids", nullable = false)
     private Integer numberOfSpotsForKids;
-
 
     public Boolean getPromoted() {
         return isPromoted;
