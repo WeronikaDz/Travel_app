@@ -1,7 +1,6 @@
-package repository;
+package com.travel_app.repository;
 
-import entity.Continent;
-import entity.TripPurchase;
+import com.travel_app.entity.TripPurchase;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TripPurchaseRepository extends JpaRepository<TripPurchase, Long> {
