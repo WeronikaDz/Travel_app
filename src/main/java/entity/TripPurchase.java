@@ -16,8 +16,8 @@ public class TripPurchase {
     @Column(name = "trip_id")
     private Long tripId;
 
-    @Column(name = "trip_id")
-    private String userData; // dane uczestników
+    @Column(name = "traveler_id")
+    private Long travelerData; // dane uczestników
 
     @Column(name = "trip_price")
     private BigDecimal tripPrice;

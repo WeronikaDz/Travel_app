@@ -1,10 +1,11 @@
 package entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-
+import java.util.Date;
+@Data
 @Entity
 @Table(name = "trips")
 
@@ -13,29 +14,45 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "trip_id")
     private Long id;
-    @ManyToMany
-    @JoinColumn(name = "city_id", referencedColumnName = "id")
-    @Column (name = "trip_from", nullable = false)
-    private String tripFrom; // czy tutaj bedzie id
-/*
-    skąd (Miasto, Lotnisko)
-    dokąd (Miasto, Hotel, Lotnisko)
-*/
-//    @ManyToOne
-//    private City city;
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
+
+    @ManyToOne
+    @JoinColumn(name = "airport_id")
+    private Airport airport;
+    @ManyToOne
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel;
+
+    @ManyToOne
+    @JoinTable(name = "trip_from",
+            joinColumns = @JoinColumn(name = "trip_id"),
+            inverseJoinColumns = {
+                    @JoinColumn(name = "city_id", referencedColumnName = "city_id"),
+                    @JoinColumn(name = "airport_id", referencedColumnName = "airport_id")
+            })
+    private City cityFrom;
+
+    @ManyToOne
+    @JoinTable(name = "trip_to",
+            joinColumns = @JoinColumn(name = "trip_id"),
+            inverseJoinColumns = {
+                    @JoinColumn(name = "city_id", referencedColumnName = "city_id"),
+                    @JoinColumn(name = "hotel_id", referencedColumnName = "hotel_id"),
+                    @JoinColumn(name = "airport_id", referencedColumnName = "airport_id")
+            })
+    private City cityTo;
 
 
     @Column (name = "trip_to", nullable = false)
     private String tripTo; // czy tutaj bedzie id
 
-
-
-
     @Column (name = "departure_date", nullable = false)
-    private LocalDate departureDate;
+    private Date departureDate;
 
     @Column (name = "return_date", nullable = false)
-    private LocalDate returnDate;
+    private Date returnDate;
 
     @Column (name = "trip_duration_in_days", nullable = false)
     private int tripDurationInDays;

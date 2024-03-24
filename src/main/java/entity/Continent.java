@@ -1,7 +1,11 @@
 package entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+@Data
 @Entity
 @Table(name = "continents")
 public class Continent {
@@ -10,6 +14,8 @@ public class Continent {
     @Column(name = "continent_id")
     private Long id;
 
+    @Setter
+    @Getter
     @Column(name = "continent_name")
     private String continentName;
 
@@ -21,12 +27,5 @@ public class Continent {
         this.id = id;
     }
 
-    public String getContinentName() {
-        return continentName;
-    }
-
-    public void setContinentName(String continentName) {
-        this.continentName = continentName;
-    }
 }
 
