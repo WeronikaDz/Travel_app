@@ -13,16 +13,23 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "trip_id")
     private Long id;
-
+    @ManyToMany
+    @JoinColumn(name = "city_id", referencedColumnName = "id")
     @Column (name = "trip_from", nullable = false)
     private String tripFrom; // czy tutaj bedzie id
 /*
     skąd (Miasto, Lotnisko)
     dokąd (Miasto, Hotel, Lotnisko)
 */
+//    @ManyToOne
+//    private City city;
+
 
     @Column (name = "trip_to", nullable = false)
     private String tripTo; // czy tutaj bedzie id
+
+
+
 
     @Column (name = "departure_date", nullable = false)
     private LocalDate departureDate;
