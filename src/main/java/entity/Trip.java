@@ -16,8 +16,10 @@ public class Trip {
 
     @Column (name = "trip_from", nullable = false)
     private String tripFrom; // czy tutaj bedzie id
-//    skąd (Miasto, Lotnisko)
-//    dokąd (Miasto, Hotel, Lotnisko)
+/*
+    skąd (Miasto, Lotnisko)
+    dokąd (Miasto, Hotel, Lotnisko)
+*/
 
     @Column (name = "trip_to", nullable = false)
     private String tripTo; // czy tutaj bedzie id
@@ -28,8 +30,8 @@ public class Trip {
     @Column (name = "return_date", nullable = false)
     private LocalDate returnDate;
 
-    @Column (name = "number_of_days", nullable = false)
-    private Integer numberOfDays;
+    @Column (name = "trip_duration_in_days", nullable = false)
+    private int tripDurationInDays;
     @Column (name = "trip_type", nullable = false)
     // available types: BB, HB, FB, AI - bedandbreakfast etc
     private String tripType;
@@ -44,9 +46,9 @@ public class Trip {
     private Boolean isPromoted;
 
     @Column (name = "number_of_spots_for_adults", nullable = false)
-    private Integer numberOfSpotsForAdults;
+    private int numberOfSpotsForAdults;
     @Column (name = "number_of_spots_for_kids", nullable = false)
-    private Integer numberOfSpotsForKids;
+    private int numberOfSpotsForKids;
 
     public Boolean getPromoted() {
         return isPromoted;
