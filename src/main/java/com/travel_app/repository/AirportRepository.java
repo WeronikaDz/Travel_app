@@ -1,7 +1,6 @@
-package repository;
+package com.travel_app.repository;
 
-import entity.Airport;
-import entity.Continent;
+import com.travel_app.entity.Airport;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AirportRepository extends JpaRepository<Airport, Long> {
