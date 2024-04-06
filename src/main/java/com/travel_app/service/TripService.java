@@ -37,11 +37,13 @@ public class TripService {
     }
 /*
     można wyszukiwać wycieczki po (np.):
-
+    mieście (Lotnisku) wylotu
     mieście (Hotelu) pobytu
     dacie wyjazdu (opcjonalnie zakresie)
     dacie powrotu (opcjonalnie zakresie)
+    typie (BB, HB, FB, AI)
     standardzie hotelu
+    ilości dni
     sortować można po (np.):
     cenie
     dacie wylotu
@@ -54,6 +56,7 @@ public class TripService {
                 .filter(trip -> trip.getAirport() != null && trip.getAirport().getAirportName().equals(airportName))
                 .collect(Collectors.toList());
     }
+// metoda wyszukująca po mieście (nazwie Hotelu) pobytu
 
     // metoda wyszukująca po typie (BB, HB, FB, AI)
     public List <Trip> findTripsByType (TripType tripType) {
@@ -70,12 +73,7 @@ public class TripService {
                 .filter(trip -> trip.getTripDurationInDays() != 0 && trip.getTripDurationInDays() == tripDurationInDays)
                 .collect(Collectors.toList());
     }
-
-    public List<Trip> findTripsByStandardInStars(int standardInStars) {
-        return tripRepository.findAll().stream()
-                .filter(trip -> trip.getHotel() !=null && trip.getHotel().getStandardInStars() == standardInStars)
-                .collect(Collectors.toList());
-    }
+    
     public List<Trip> findTripsByDepartureDate(LocalDate departureDate) {
         return tripRepository.findAll().stream()
                 .filter(trip -> trip.getDepartureDate() != null && trip.getDepartureDate().equals(departureDate))
@@ -85,5 +83,18 @@ public class TripService {
     public List<Trip> sortByPriceForAdult (List<Trip> trips) {
         Collections.sort(trips, Comparator.comparing(Trip::getPriceForAdult));
         return trips;
+    }
+public List<Trip> findTripsByHotelName(String hotelName) {
+        return tripRepository.findAll().stream()
+                .filter(trip -> trip.getHotel() !=null && trip.getHotel().getHotelName().equals(hotelName))
+                .collect(Collectors.toList());
+}
+
+// metoda wyszukująca po standardzie hotelu
+
+    public List<Trip> findTripsByStandardInStars(int standardInStars) {
+        return tripRepository.findAll().stream()
+                .filter(trip -> trip.getHotel() !=null && trip.getHotel().getStandardInStars() == standardInStars)
+                .collect(Collectors.toList());
     }
 }

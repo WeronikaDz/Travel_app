@@ -89,4 +89,28 @@ class TripServiceTest {
     }
 
 
+
+    @Test
+    void testFindTripsByHotelName(){
+        //given
+        String hotelName = "Grand Hotel";
+        //when
+        List<Trip> hotels = tripService.findTripsByHotelName(hotelName);
+        assertNotNull(hotels);
+
+        //then
+        int expectedNumberOfHotels = 1;
+        assertEquals(expectedNumberOfHotels, hotels.size());
+    }
+    @Test
+    void testFindTripsByStandardInStars(){
+        //given
+        int standardInStars = 4;
+        //when
+        List<Trip> hotels = tripService.findTripsByStandardInStars(standardInStars);
+        assertNotNull(hotels);
+        //then
+        int expectedNumberOfTrips = 2;
+        assertEquals(expectedNumberOfTrips,hotels.size());
+    }
 }
