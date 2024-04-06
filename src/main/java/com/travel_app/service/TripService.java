@@ -53,6 +53,19 @@ public class TripService {
                 .filter(trip -> trip.getAirport() != null && trip.getAirport().getAirportName().equals(airportName))
                 .collect(Collectors.toList());
     }
+// metoda wyszukująca po mieście (nazwie Hotelu) pobytu
 
+public List<Trip> findTripsByHotelName(String hotelName) {
+        return tripRepository.findAll().stream()
+                .filter(trip -> trip.getHotel() !=null && trip.getHotel().getHotelName().equals(hotelName))
+                .collect(Collectors.toList());
+}
 
+// metoda wyszukująca po standardzie hotelu
+
+    public List<Trip> findTripsByStandardInStars(int standardInStars) {
+        return tripRepository.findAll().stream()
+                .filter(trip -> trip.getHotel() !=null && trip.getHotel().getStandardInStars() == standardInStars)
+                .collect(Collectors.toList());
+    }
 }
