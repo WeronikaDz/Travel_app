@@ -245,8 +245,7 @@ public class Trip {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Trip trip = (Trip) o;
+        if (!(o instanceof Trip trip)) return false;
         return tripDurationInDays == trip.tripDurationInDays && numberOfSpotsForAdults == trip.numberOfSpotsForAdults && numberOfSpotsForKids == trip.numberOfSpotsForKids && Objects.equals(id, trip.id) && Objects.equals(city, trip.city) && Objects.equals(airport, trip.airport) && Objects.equals(hotel, trip.hotel) && Objects.equals(cityFrom, trip.cityFrom) && Objects.equals(airportFrom, trip.airportFrom) && Objects.equals(cityTo, trip.cityTo) && Objects.equals(airportTo, trip.airportTo) && Objects.equals(hotelTo, trip.hotelTo) && Objects.equals(departureDate, trip.departureDate) && Objects.equals(returnDate, trip.returnDate) && tripType == trip.tripType && Objects.equals(priceForAdult, trip.priceForAdult) && Objects.equals(priceForKid, trip.priceForKid) && Objects.equals(isPromoted, trip.isPromoted);
     }
 
