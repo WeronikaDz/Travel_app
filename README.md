@@ -1,18 +1,18 @@
-# Aplikacja dla biura podróży
+# App for travel agency
 
-Projekt końcowy realizowany w ramach kursu programowania „Java od podstaw" w Software Development Academy. 
+Final project implemented as part of the Java programming course at the Software Development Academy. 
 
-## Wykonawcy projektu:
+## Project co-developers:
 <ul>
   <li>Wiktor Krajewski</li>
 <li>Jakub Włodarczyk
 <li>Weronika Dzierwa</li></li>
 </ul>
 
-## Podstawowe założenia projektowe
+## Basic assumptions of the project
 
-Stworzenie systemu umożliwiającego wyszukiwanie wycieczek po zadanych kryteriach oraz ich zakup.
+Creating a system to search for trips according to given criteria and purchase them.
 
-## Technologie
+## Technologies
 
 Java, Spring, Hibernate
