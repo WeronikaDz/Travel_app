@@ -75,7 +75,7 @@ INSERT INTO airport (airport_name, city_id) VALUES ('Cape Town International Air
 
 INSERT INTO hotel (hotel_name, standard_in_stars, hotel_description, city_id) VALUES ('Hotel Bristol', 5, 'Luxurious hotel in the heart of Warsaw', 1);
 INSERT INTO hotel (hotel_name, standard_in_stars, hotel_description, city_id) VALUES ('Grand Hotel', 4, 'Elegant hotel in Berlin city center', 2);
-INSERT INTO hotel (hotel_name, standard_in_stars, hotel_description, city_id) VALUES ('Marriott Marquis', 5, 'Luxury hotel near Times Square', 3);
+INSERT INTO hotel (hotel_name, standard_in_stars, hotel_description, city_id) VALUES ('Marriott Marquis', 1, 'Luxury hotel near Times Square', 3);
 INSERT INTO hotel (hotel_name, standard_in_stars, hotel_description, city_id) VALUES ('Copacabana Palace', 5, 'Iconic hotel overlooking Copacabana Beach', 4);
 INSERT INTO hotel (hotel_name, standard_in_stars, hotel_description, city_id) VALUES ('Four Seasons Hotel Cairo', 5, 'Luxurious hotel with views of the Nile', 5);
 INSERT INTO hotel (hotel_name, standard_in_stars, hotel_description, city_id) VALUES ('Fairmont Royal York', 4, 'Historic luxury hotel in Toronto', 6);

@@ -1,10 +1,13 @@
 package com.travel_app.service;
 
-import com.travel_app.entity.Airport;
 import com.travel_app.entity.Trip;
+import com.travel_app.entity.TripType;
 import com.travel_app.repository.*;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,13 +37,11 @@ public class TripService {
     }
 /*
     można wyszukiwać wycieczki po (np.):
-    mieście (Lotnisku) wylotu
+
     mieście (Hotelu) pobytu
     dacie wyjazdu (opcjonalnie zakresie)
     dacie powrotu (opcjonalnie zakresie)
-    typie (BB, HB, FB, AI)
     standardzie hotelu
-    ilości dni
     sortować można po (np.):
     cenie
     dacie wylotu
@@ -54,5 +55,35 @@ public class TripService {
                 .collect(Collectors.toList());
     }
 
+    // metoda wyszukująca po typie (BB, HB, FB, AI)
+    public List <Trip> findTripsByType (TripType tripType) {
+        return tripRepository.findAll().stream()
+                .filter(trip -> trip.getTripType() != null && trip.getTripType().equals(tripType))
+                .collect(Collectors.toList());
 
+    }
+
+    // metoda wyszukująca po ilości dni
+
+    public List<Trip> findTripsByDurationInDays (int tripDurationInDays) {
+        return tripRepository.findAll().stream()
+                .filter(trip -> trip.getTripDurationInDays() != 0 && trip.getTripDurationInDays() == tripDurationInDays)
+                .collect(Collectors.toList());
+    }
+
+    public List<Trip> findTripsByStandardInStars(int standardInStars) {
+        return tripRepository.findAll().stream()
+                .filter(trip -> trip.getHotel() !=null && trip.getHotel().getStandardInStars() == standardInStars)
+                .collect(Collectors.toList());
+    }
+    public List<Trip> findTripsByDepartureDate(LocalDate departureDate) {
+        return tripRepository.findAll().stream()
+                .filter(trip -> trip.getDepartureDate() != null && trip.getDepartureDate().equals(departureDate))
+                .collect(Collectors.toList());
+    }
+
+    public List<Trip> sortByPriceForAdult (List<Trip> trips) {
+        Collections.sort(trips, Comparator.comparing(Trip::getPriceForAdult));
+        return trips;
+    }
 }
