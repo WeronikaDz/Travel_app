@@ -4,11 +4,10 @@ import com.travel_app.entity.Trip;
 import com.travel_app.entity.TripType;
 import com.travel_app.repository.*;
 import org.springframework.stereotype.Service;
+import java.sql.Date;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -73,12 +72,20 @@ public class TripService {
                 .filter(trip -> trip.getTripDurationInDays() != 0 && trip.getTripDurationInDays() == tripDurationInDays)
                 .collect(Collectors.toList());
     }
-    
+
+
     public List<Trip> findTripsByDepartureDate(LocalDate departureDate) {
         return tripRepository.findAll().stream()
                 .filter(trip -> trip.getDepartureDate() != null && trip.getDepartureDate().equals(departureDate))
                 .collect(Collectors.toList());
     }
+
+    public List<Trip> findTripsByReturnDate(LocalDate returnDate) {
+        return tripRepository.findAll().stream()
+                .filter(trip -> trip.getReturnDate() != null && trip.getReturnDate().equals(returnDate))
+                .collect(Collectors.toList());
+    }
+
 
     public List<Trip> sortByPriceForAdult (List<Trip> trips) {
         Collections.sort(trips, Comparator.comparing(Trip::getPriceForAdult));
@@ -97,4 +104,10 @@ public List<Trip> findTripsByHotelName(String hotelName) {
                 .filter(trip -> trip.getHotel() !=null && trip.getHotel().getStandardInStars() == standardInStars)
                 .collect(Collectors.toList());
     }
+
+    public List<Trip> findAll() {
+
+        return null;
+    }
+
 }

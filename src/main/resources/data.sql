@@ -148,6 +148,7 @@ INSERT INTO trip_purchase (trip_id, traveler_id, trip_price) VALUES (2, 18, 1800
 INSERT INTO trip_purchase (trip_id, traveler_id, trip_price) VALUES (3, 19, 2500.00);
 INSERT INTO trip_purchase (trip_id, traveler_id, trip_price) VALUES (4, 20, 3500.00);
 
+
 INSERT INTO trip (city_id, airport_id, hotel_id, city_from_id, airport_from_id, city_to_id, airport_to_id, hotel_to_id, departure_date, return_date, trip_duration_in_days, trip_type, price_for_adult, price_for_kid, is_promoted, number_of_spots_for_adults, number_of_spots_for_kids)
 VALUES (2, 2, 2, 1, 1, 4, 4, 4, '2024-06-15', '2024-06-25', 10, 'HB', 1800.00, 900.00, FALSE, 40, 15);
 INSERT INTO trip (city_id, airport_id, hotel_id, city_from_id, airport_from_id, city_to_id, airport_to_id, hotel_to_id, departure_date, return_date, trip_duration_in_days, trip_type, price_for_adult, price_for_kid, is_promoted, number_of_spots_for_adults, number_of_spots_for_kids)

@@ -2,6 +2,7 @@ package com.travel_app.entity;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -47,10 +48,10 @@ public class Trip {
     private Hotel hotelTo;
 
     @Column(name = "departure_date")
-    private Date departureDate;
+    private LocalDate departureDate;
 
     @Column(name = "return_date")
-    private Date returnDate;
+    private LocalDate returnDate;
 
     @Column(name = "trip_duration_in_days")
     private int tripDurationInDays;
@@ -77,7 +78,7 @@ public class Trip {
     public Trip() {
     }
 
-    public Trip(Long id, City city, Airport airport, Hotel hotel, City cityFrom, Airport airportFrom, City cityTo, Airport airportTo, Hotel hotelTo, Date departureDate, Date returnDate, int tripDurationInDays, TripType tripType, BigDecimal priceForAdult, BigDecimal priceForKid, Boolean isPromoted, int numberOfSpotsForAdults, int numberOfSpotsForKids) {
+    public Trip(Long id, City city, Airport airport, Hotel hotel, City cityFrom, Airport airportFrom, City cityTo, Airport airportTo, Hotel hotelTo, LocalDate departureDate, LocalDate returnDate, int tripDurationInDays, TripType tripType, BigDecimal priceForAdult, BigDecimal priceForKid, Boolean isPromoted, int numberOfSpotsForAdults, int numberOfSpotsForKids) {
         this.id = id;
         this.city = city;
         this.airport = airport;
@@ -170,19 +171,19 @@ public class Trip {
         this.hotelTo = hotelTo;
     }
 
-    public Date getDepartureDate() {
+    public LocalDate getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(Date departureDate) {
+    public void setDepartureDate(LocalDate departureDate) {
         this.departureDate = departureDate;
     }
 
-    public Date getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(Date returnDate) {
+    public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
 
