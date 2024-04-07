@@ -31,17 +31,26 @@ public class ApplicationSecurityConfig {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // todo poprosić Jarka za tydzień o korektę tej metody aby rozszerzyć ja o dodatkowe funkcje PUT POST etc.
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.httpBasic(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET, "/alltrips").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
-                        .anyRequest().permitAll() // wpuszczamy wszystkich pozostałych
-
+                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET, "/alltrips").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                                // tutaj filtrowanie
+                        .anyRequest().permitAll()
+//                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, "/newtrips").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
+//                        .anyRequest().permitAll()
+//                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.DELETE, "/deletetrips").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
+//                        .anyRequest().permitAll()
+//                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.PUT, "/updatetrips").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
+//                        .anyRequest().permitAll() // wpuszczamy wszystkich pozostałych
                 );
         // dodać kolejne requesty
         return http.build();
     }
+
+    //zamiast configure mamy securityFilterChain
 //    protected void configure(HttpSecurity http) throws Exception {
 //        http.authorizeRequests() // deklarujemy że zadania muszą byc autoryzowane
 //                .antMatchers("/", "index") // część naszej białej listy

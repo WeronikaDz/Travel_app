@@ -1,6 +1,6 @@
 package com.travel_app.controller;
 
-import com.travel_app.model.User;
+import com.travel_app.model.Trip;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,12 +9,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/users")
-public class UserController {
+public class TripController {
 
-    private static final List<User> USERS = Arrays.asList(
-            new User(1, "Adam Małysz"),
-            new User(2, "Britney Spears"),
-            new User(3, "Anna Smith")
+    private static final List<Trip> TRIPS = Arrays.asList(
+            new Trip(1, "Adam Małysz"),
+            new Trip(2, "Britney Spears"),
+            new Trip(3, "Anna Smith")
     );
 
 
