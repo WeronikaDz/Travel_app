@@ -8,13 +8,13 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/users")
+@RequestMapping("api/trips")
 public class TripController {
 
     private static final List<Trip> TRIPS = Arrays.asList(
-            new Trip(1, "Adam Małysz"),
-            new Trip(2, "Britney Spears"),
-            new Trip(3, "Anna Smith")
+            new Trip(1, "Polska"),
+            new Trip(2, "Hiszpania"),
+            new Trip(3, "Rosja")
     );
 
 

@@ -11,4 +11,12 @@ public class Trip {
 
     }
 
+    public Integer getTripId() {
+        return tripId;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
 }

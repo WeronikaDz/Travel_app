@@ -2,11 +2,9 @@ package com.travel_app.controller;
 
 import com.travel_app.model.Trip;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,6 +26,11 @@ public class TripManagementController {
         System.out.println(trip);
     }
 
+    @GetMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public List<Trip> whatever () {
+        return TRIPS;
+    }
 
 }
 
