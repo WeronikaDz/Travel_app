@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("management/trips")
+@RequestMapping("management/alltrips")
 public class TripManagementController {
 
     private static final List<Trip> TRIPS = Arrays.asList(
@@ -21,14 +21,12 @@ public class TripManagementController {
     );
 
     @PostMapping
-    @PreAuthorize("hasAuthority('edit:trip')")
+//    @PreAuthorize("hasAuthority('edit:trip')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void editTrip (@RequestBody Trip trip) {
         System.out.println("Edit Trip");
         System.out.println(trip);
     }
-
-
-
 
 
 }
