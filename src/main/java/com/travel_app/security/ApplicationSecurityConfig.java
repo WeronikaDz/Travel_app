@@ -16,6 +16,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import java.util.concurrent.TimeUnit;
 
 import static com.travel_app.security.ApplicationUserRole.*;
 
@@ -31,7 +34,7 @@ public class ApplicationSecurityConfig {
         this.passwordEncoder = passwordEncoder;
     }
 
-
+// todo spytać czy w tej metodzie musi być podany "id" przy ścieżce
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.httpBasic(Customizer.withDefaults())
@@ -39,10 +42,31 @@ public class ApplicationSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "management/alltrips").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
                         .requestMatchers(HttpMethod.POST, "management/newtrips").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
-                        .requestMatchers(HttpMethod.DELETE, "management/deletetrips").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
-                        .requestMatchers(HttpMethod.PUT, "management/updatetrips").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
+                        .requestMatchers(HttpMethod.DELETE, "management/deletetrips/{id}").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
+                        .requestMatchers(HttpMethod.PUT, "management/updatetrips/{id}").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
+                        // todo
+                        .and()
+                        .formLogin()
+                        .loginPage("/login")
                         .anyRequest().permitAll() // wpuszczamy wszystkich pozostałych
-                );
+                        .permitAll()
+                        .defaultSuccessUrl("/courses", true)
+                        .passwordParameter("password1")
+                        .usernameParameter("username")// jeśli chcemy użyć innej nazwy niz pliku html
+                        .and()
+                        .rememberMe() // domyślnie działa przez 30 minut braku aktywności
+                        .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
+                        .key("jakiskluczdoszyfrowania") // klucz do szyfrowania przez MD5 dla zawartości, czyli 'username', 'expirationDate'
+                        .rememberMeParameter("remember-me")
+                        .and()
+                        .logout()
+                        .logoutUrl("/logout")
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                        .clearAuthentication(true)
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID", "remember-me")
+                        .logoutSuccessUrl("/login");
+    }
 
         return http.build();
     }

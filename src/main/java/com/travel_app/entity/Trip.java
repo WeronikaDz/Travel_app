@@ -253,5 +253,8 @@ public class Trip {
     public int hashCode() {
         return Objects.hash(id, city, airport, hotel, cityFrom, airportFrom, cityTo, airportTo, hotelTo, departureDate, returnDate, tripDurationInDays, tripType, priceForAdult, priceForKid, isPromoted, numberOfSpotsForAdults, numberOfSpotsForKids);
     }
+
+    public void setCreationDate(Date date) {
+    }
 }
 
