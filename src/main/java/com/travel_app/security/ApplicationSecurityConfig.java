@@ -41,7 +41,7 @@ public class ApplicationSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "management/alltrips").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
-                        .requestMatchers(HttpMethod.POST, "management/newtrips").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
+                        .requestMatchers(HttpMethod.POST, "management/addtrip").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
                         .requestMatchers(HttpMethod.DELETE, "management/deletetrips/{id}").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
                         .requestMatchers(HttpMethod.PUT, "management/updatetrips/{id}").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
                         // todo

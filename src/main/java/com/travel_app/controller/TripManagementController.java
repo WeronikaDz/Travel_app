@@ -34,7 +34,7 @@ public class TripManagementController {
         tripService.deleteTrip(id);
     }
 
-    @PutMapping("/updatetrips")
+    @PutMapping("/updatetrips/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void updateTrip(@PathVariable Integer id, @RequestBody Trip trip) {
         tripService.updateTrip(id, trip);

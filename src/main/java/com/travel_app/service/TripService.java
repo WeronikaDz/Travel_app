@@ -23,31 +23,74 @@ public class TripService {
 
     @PersistenceContext
     private EntityManager entityManager;
-
     @Transactional
     public void addTrip(Trip trip) {
-        entityManager.persist(trip);
+        String insertQuery = "INSERT INTO trip (city_id, airport_id, hotel_id, city_from_id, airport_from_id, city_to_id, airport_to_id, hotel_to_id, departure_date, return_date, trip_duration_in_days, trip_type, price_for_adult, price_for_kid, is_promoted, number_of_spots_for_adults, number_of_spots_for_kids) " +
+                "VALUES (:cityId, :airportId, :hotelId, :cityFromId, :airportFromId, :cityToId, :airportToId, :hotelToId, :departureDate, :returnDate, :tripDurationInDays, :tripType, :priceForAdult, :priceForKid, :isPromoted, :numberOfSpotsForAdults, :numberOfSpotsForKids)";
+
+        entityManager.createNativeQuery(insertQuery)
+                .setParameter("cityId", trip.getCity().getId())
+                .setParameter("airportId", trip.getAirport().getId())
+                .setParameter("hotelId", trip.getHotel().getId())
+                .setParameter("cityFromId", trip.getCityFrom().getId())
+                .setParameter("airportFromId", trip.getAirportFrom().getId())
+                .setParameter("cityToId", trip.getCityTo().getId())
+                .setParameter("airportToId", trip.getAirportTo().getId())
+                .setParameter("hotelToId", trip.getHotelTo().getId())
+                .setParameter("departureDate", trip.getDepartureDate())
+                .setParameter("returnDate", trip.getReturnDate())
+                .setParameter("tripDurationInDays", trip.getTripDurationInDays())
+                .setParameter("tripType", trip.getTripType().toString())
+                .setParameter("priceForAdult", trip.getPriceForAdult())
+                .setParameter("priceForKid", trip.getPriceForKid())
+                .setParameter("isPromoted", trip.getPromoted())
+                .setParameter("numberOfSpotsForAdults", trip.getNumberOfSpotsForAdults())
+                .setParameter("numberOfSpotsForKids", trip.getNumberOfSpotsForKids())
+                .executeUpdate();
     }
+
     @Transactional
     public void updateTrip(Integer tripId, Trip updatedTrip) {
-        Trip existingTrip = entityManager.find(Trip.class, tripId);
-        if (existingTrip != null) {
-            existingTrip.setHotel(updatedTrip.getHotel());
-            existingTrip.setCityFrom(updatedTrip.getCityFrom());
-            existingTrip.setAirportFrom(updatedTrip.getAirportFrom());
-            existingTrip.setCityTo(updatedTrip.getCityTo());
-            existingTrip.setAirportTo(updatedTrip.getAirportTo());
-            existingTrip.setHotelTo(updatedTrip.getHotelTo());
-            existingTrip.setDepartureDate(updatedTrip.getDepartureDate());
-            existingTrip.setReturnDate(updatedTrip.getReturnDate());
-            existingTrip.setTripDurationInDays(updatedTrip.getTripDurationInDays());
-            existingTrip.setTripType(updatedTrip.getTripType());
-            existingTrip.setPriceForAdult(updatedTrip.getPriceForAdult());
-            existingTrip.setPriceForKid(updatedTrip.getPriceForKid());
-            existingTrip.setPromoted(updatedTrip.getPromoted());
-            existingTrip.setNumberOfSpotsForAdults(updatedTrip.getNumberOfSpotsForAdults());
-            existingTrip.setNumberOfSpotsForKids(updatedTrip.getNumberOfSpotsForKids());
-        }
+        String updateQuery = "UPDATE trip " +
+                "SET city_id = :cityId, " +
+                "airport_id = :airportId, " +
+                "hotel_id = :hotelId, " +
+                "city_from_id = :cityFromId, " +
+                "airport_from_id = :airportFromId, " +
+                "city_to_id = :cityToId, " +
+                "airport_to_id = :airportToId, " +
+                "hotel_to_id = :hotelToId, " +
+                "departure_date = :departureDate, " +
+                "return_date = :returnDate, " +
+                "trip_duration_in_days = :tripDurationInDays, " +
+                "trip_type = :tripType, " +
+                "price_for_adult = :priceForAdult, " +
+                "price_for_kid = :priceForKid, " +
+                "is_promoted = :isPromoted, " +
+                "number_of_spots_for_adults = :numberOfSpotsForAdults, " +
+                "number_of_spots_for_kids = :numberOfSpotsForKids " +
+                "WHERE id = :tripId";
+
+        entityManager.createNativeQuery(updateQuery)
+                .setParameter("cityId", updatedTrip.getCity().getId())
+                .setParameter("airportId", updatedTrip.getAirport().getId())
+                .setParameter("hotelId", updatedTrip.getHotel().getId())
+                .setParameter("cityFromId", updatedTrip.getCityFrom().getId())
+                .setParameter("airportFromId", updatedTrip.getAirportFrom().getId())
+                .setParameter("cityToId", updatedTrip.getCityTo().getId())
+                .setParameter("airportToId", updatedTrip.getAirportTo().getId())
+                .setParameter("hotelToId", updatedTrip.getHotelTo().getId())
+                .setParameter("departureDate", updatedTrip.getDepartureDate())
+                .setParameter("returnDate", updatedTrip.getReturnDate())
+                .setParameter("tripDurationInDays", updatedTrip.getTripDurationInDays())
+                .setParameter("tripType", updatedTrip.getTripType().toString())
+                .setParameter("priceForAdult", updatedTrip.getPriceForAdult())
+                .setParameter("priceForKid", updatedTrip.getPriceForKid())
+                .setParameter("isPromoted", updatedTrip.getPromoted())
+                .setParameter("numberOfSpotsForAdults", updatedTrip.getNumberOfSpotsForAdults())
+                .setParameter("numberOfSpotsForKids", updatedTrip.getNumberOfSpotsForKids())
+                .setParameter("tripId", tripId)
+                .executeUpdate();
     }
 
     private final AirportRepository airportRepository;
