@@ -13,8 +13,8 @@ public class TripDTO {
     private String cityToName;
     private String airportToName;
     private String hotelName;
-//    private LocalDate departureDate;
-//    private LocalDate returnDate;
+    private String departureDate;
+    private String returnDate;
     private int tripDurationInDays;
     private TripType tripType;
     private BigDecimal priceForAdult;
@@ -23,14 +23,14 @@ public class TripDTO {
     private int numberOfSpotsForAdults;
     private int numberOfSpotsForKids;
 
-    public TripDTO(String cityFromName, String airportFromName, String cityToName, String airportToName, String hotelName, int tripDurationInDays, TripType tripType, BigDecimal priceForAdult, BigDecimal priceForKid, boolean isPromoted, int numberOfSpotsForAdults, int numberOfSpotsForKids) {
+    public TripDTO(String cityFromName, String airportFromName, String cityToName, String airportToName, String hotelName, String departureDate, String returnDate, int tripDurationInDays, TripType tripType, BigDecimal priceForAdult, BigDecimal priceForKid, boolean isPromoted, int numberOfSpotsForAdults, int numberOfSpotsForKids) {
         this.cityFromName = cityFromName;
         this.airportFromName = airportFromName;
         this.cityToName = cityToName;
         this.airportToName = airportToName;
         this.hotelName = hotelName;
-//        this.departureDate = departureDate;
-//        this.returnDate = returnDate;
+        this.departureDate = departureDate;
+        this.returnDate = returnDate;
         this.tripDurationInDays = tripDurationInDays;
         this.tripType = tripType;
         this.priceForAdult = priceForAdult;
@@ -80,21 +80,21 @@ public class TripDTO {
         this.hotelName = hotelName;
     }
 
-//    public LocalDate getDepartureDate() {
-//        return departureDate;
-//    }
-//
-//    public void setDepartureDate(LocalDate departureDate) {
-//        this.departureDate = departureDate;
-//    }
-//
-//    public LocalDate getReturnDate() {
-//        return returnDate;
-//    }
-//
-//    public void setReturnDate(LocalDate returnDate) {
-//        this.returnDate = returnDate;
-//    }
+    public String getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(String departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public String getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(String returnDate) {
+        this.returnDate = returnDate;
+    }
 
     public int getTripDurationInDays() {
         return tripDurationInDays;

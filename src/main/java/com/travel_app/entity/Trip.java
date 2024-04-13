@@ -78,12 +78,11 @@ public class Trip {
     public Trip() {
     }
 
-//    public TripDTO map() {
-//       return new TripDTO(this.cityFrom.getCityName(), this.cityTo.getCityName(), this.airport.getAirportName(), this.hotel.getHotelName());
-//    }
-
     public TripDTO map() {
-        return new TripDTO(this.cityFrom.getCityName(), this.airportFrom.getAirportName(), this.cityTo.getCityName(), this.airportTo.getAirportName(), this.hotel.getHotelName(), this.tripDurationInDays, this.tripType, this.priceForAdult, this.priceForKid, this.isPromoted.booleanValue(), this.numberOfSpotsForAdults, this.numberOfSpotsForKids);
+        return new TripDTO(this.cityFrom.getCityName(), this.airportFrom.getAirportName(),
+                this.cityTo.getCityName(), this.airportTo.getAirportName(), this.hotel.getHotelName(),this.departureDate.toString(),
+                this.returnDate.toString(), this.tripDurationInDays, this.tripType, this.priceForAdult, this.priceForKid,
+                this.isPromoted, this.numberOfSpotsForAdults, this.numberOfSpotsForKids);
     }
 
     public Trip(Long id, City city, Airport airport, Hotel hotel, City cityFrom, Airport airportFrom, City cityTo, Airport airportTo, Hotel hotelTo, Date departureDate, Date returnDate, int tripDurationInDays, TripType tripType, BigDecimal priceForAdult, BigDecimal priceForKid, Boolean isPromoted, int numberOfSpotsForAdults, int numberOfSpotsForKids) {
