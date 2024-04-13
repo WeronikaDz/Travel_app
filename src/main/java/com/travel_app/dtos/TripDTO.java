@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class TripDTO {
-// todo tutaj dodać wszystkie interesujące nas pola
+
     private String cityFromName;
     private String airportFromName;
     private String cityToName;

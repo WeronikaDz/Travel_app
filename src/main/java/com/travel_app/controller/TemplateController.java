@@ -14,7 +14,7 @@ public class TemplateController {
     }
 
     @GetMapping("trips")
-    public String getCourses(){
+    public String getTrips(){
         return "trips";
     }
 }

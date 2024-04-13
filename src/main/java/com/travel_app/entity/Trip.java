@@ -3,6 +3,7 @@ package com.travel_app.entity;
 import com.travel_app.dtos.TripDTO;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -84,6 +85,8 @@ public class Trip {
                 this.returnDate.toString(), this.tripDurationInDays, this.tripType, this.priceForAdult, this.priceForKid,
                 this.isPromoted, this.numberOfSpotsForAdults, this.numberOfSpotsForKids);
     }
+
+
 
     public Trip(Long id, City city, Airport airport, Hotel hotel, City cityFrom, Airport airportFrom, City cityTo, Airport airportTo, Hotel hotelTo, Date departureDate, Date returnDate, int tripDurationInDays, TripType tripType, BigDecimal priceForAdult, BigDecimal priceForKid, Boolean isPromoted, int numberOfSpotsForAdults, int numberOfSpotsForKids) {
         this.id = id;
@@ -262,7 +265,5 @@ public class Trip {
         return Objects.hash(id, city, airport, hotel, cityFrom, airportFrom, cityTo, airportTo, hotelTo, departureDate, returnDate, tripDurationInDays, tripType, priceForAdult, priceForKid, isPromoted, numberOfSpotsForAdults, numberOfSpotsForKids);
     }
 
-    public void setCreationDate(Date date) {
-    }
 }
 
