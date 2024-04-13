@@ -1,11 +1,13 @@
 package com.travel_app.controller;
 
+import com.travel_app.dtos.TripDTO;
 import com.travel_app.entity.Trip;
 import com.travel_app.entity.Airport;
 import com.travel_app.entity.City;
 import com.travel_app.entity.Hotel;
 import com.travel_app.entity.TripType;
 import com.travel_app.repository.TripRepository;
+import com.travel_app.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,23 +23,25 @@ import java.util.Map;
 @RequestMapping("/management")
 public class TripManagementController {
     private final TripRepository tripRepository;
+    private final TripService tripService;
 
-    @Autowired
-    public TripManagementController(TripRepository tripRepository) {
+
+    public TripManagementController(TripRepository tripRepository, TripService tripService) {
         this.tripRepository = tripRepository;
+        this.tripService = tripService;
     }
 
-    //todo metoda działa ale json to jakiś horror więc trzeba chyba pozmieniać strukturę danych.
+    //todo metoda ma wywoływać z klasy serviowej a nie z repo. zrobić pakiet DTO i tam ma być obiekt z interesującymi nas parametrami.
     @GetMapping("/alltrips")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    public List<Trip> showTrips() {
-        return tripRepository.findAll();
+    public List<TripDTO> showTrips() {
+        return tripService.findAll();
     }
 // todo zapytać czy ta metoda ma sens:
 //W tej metodzie nie musimy już ręcznie ustawiać wszystkich pól encji Trip, ponieważ obiekt Trip jest przekazywany w całości jako ciało żądania (RequestBody).
 // W momencie, gdy Spring przyjmuje żądanie POST, automatycznie mapuje dane z ciała żądania do obiektu Trip.
 // Dlatego nie ma potrzeby ręcznego ustawiania tych pól, chyba że chcemy je modyfikować lub dodawać dodatkową logikę walidacji. Ta metoda jest teraz gotowa do użyc
-    // no i ten setCreationDate
+
     @PostMapping("/addtrip")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<String> addTrip(@RequestBody Trip trip) {
@@ -47,9 +51,6 @@ public class TripManagementController {
             Airport airport = trip.getAirport();
             Hotel hotel = trip.getHotel();
             // Tutaj można dodać dodatkową logikę sprawdzającą istnienie miast, lotnisk i hoteli w bazie
-            // todo poniższego nie trzeba?
-            // Ustaw bieżącą datę jako datę dodania wycieczki
-            trip.setCreationDate(new Date());
 
             // Zapisz wycieczkę do bazy danych
             tripRepository.save(trip);

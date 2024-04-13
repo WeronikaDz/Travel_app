@@ -1,5 +1,6 @@
 package com.travel_app.service;
 
+import com.travel_app.dtos.TripDTO;
 import com.travel_app.entity.Trip;
 import com.travel_app.entity.TripType;
 import com.travel_app.repository.*;
@@ -63,7 +64,6 @@ public class TripService {
         return tripRepository.findAll().stream()
                 .filter(trip -> trip.getTripType() != null && trip.getTripType().equals(tripType))
                 .collect(Collectors.toList());
-
     }
 
     // metoda wyszukująca po ilości dni
@@ -96,5 +96,10 @@ public List<Trip> findTripsByHotelName(String hotelName) {
         return tripRepository.findAll().stream()
                 .filter(trip -> trip.getHotel() !=null && trip.getHotel().getStandardInStars() == standardInStars)
                 .collect(Collectors.toList());
+    }
+
+    public List<TripDTO> findAll() {
+        return tripRepository.findAll().stream()
+                .map(Trip::map).collect(Collectors.toList());
     }
 }

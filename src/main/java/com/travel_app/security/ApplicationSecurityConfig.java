@@ -45,28 +45,28 @@ public class ApplicationSecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "management/deletetrips/{id}").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
                         .requestMatchers(HttpMethod.PUT, "management/updatetrips/{id}").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
                         // todo
-                        .and()
-                        .formLogin()
-                        .loginPage("/login")
-                        .anyRequest().permitAll() // wpuszczamy wszystkich pozostałych
-                        .permitAll()
-                        .defaultSuccessUrl("/courses", true)
-                        .passwordParameter("password1")
-                        .usernameParameter("username")// jeśli chcemy użyć innej nazwy niz pliku html
-                        .and()
-                        .rememberMe() // domyślnie działa przez 30 minut braku aktywności
-                        .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
-                        .key("jakiskluczdoszyfrowania") // klucz do szyfrowania przez MD5 dla zawartości, czyli 'username', 'expirationDate'
-                        .rememberMeParameter("remember-me")
-                        .and()
-                        .logout()
-                        .logoutUrl("/logout")
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-                        .clearAuthentication(true)
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID", "remember-me")
-                        .logoutSuccessUrl("/login");
-    }
+//                        .and()
+//                        .formLogin()
+//                        .loginPage("/login")
+                        .anyRequest().permitAll()); // wpuszczamy wszystkich pozostałych
+//                        .permitAll()
+//                        .defaultSuccessUrl("/courses", true)
+//                        .passwordParameter("password1")
+//                        .usernameParameter("username")// jeśli chcemy użyć innej nazwy niz pliku html
+//                        .and()
+//                        .rememberMe() // domyślnie działa przez 30 minut braku aktywności
+//                        .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
+//                        .key("jakiskluczdoszyfrowania") // klucz do szyfrowania przez MD5 dla zawartości, czyli 'username', 'expirationDate'
+//                        .rememberMeParameter("remember-me")
+//                        .and()
+//                        .logout()
+//                        .logoutUrl("/logout")
+//                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+//                        .clearAuthentication(true)
+//                        .invalidateHttpSession(true)
+//                        .deleteCookies("JSESSIONID", "remember-me")
+//                        .logoutSuccessUrl("/login");
+
 
         return http.build();
     }
