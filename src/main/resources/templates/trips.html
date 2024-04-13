@@ -9,6 +9,20 @@
 </head>
 <body>
 <h1> Trips </h1>
+<table>
+    <tr>
+        <td>Last name</td>
+        <td>First name</td>
+        <td>Email address</td>
+        <td>Phone number</td>
+    </tr>
+    <tr th:each="guest:${guests}">
+        <td th:text="${guest.lastName}">Last name</td>
+        <td th:text="${guest.firstName}">Last name</td>
+        <td th:text="${guest.emailAddress}">Last name</td>
+        <td th:text="${guest.phoneNumber}">Last name</td>
+    </tr>
+</table>
 <div class = "container">
     <form class="form-signin" method="get" action="/logout">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
