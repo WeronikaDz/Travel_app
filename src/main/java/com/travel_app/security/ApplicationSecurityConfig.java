@@ -39,6 +39,7 @@ public class ApplicationSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.httpBasic(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
+                .formLogin(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "management/alltrips").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
                         .requestMatchers(HttpMethod.POST, "management/newtrips").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
