@@ -79,7 +79,7 @@ public class Trip {
     }
 
     public TripDTO map() {
-       return new TripDTO(this.city.getCityName(), this.airport.getAirportName(), this.hotel.getHotelName());
+       return new TripDTO(this.getCityFrom().getCityName(), this.cityTo.getCityName(), this.airport.getAirportName(), this.hotel.getHotelName());
     }
 
     public Trip(Long id, City city, Airport airport, Hotel hotel, City cityFrom, Airport airportFrom, City cityTo, Airport airportTo, Hotel hotelTo, Date departureDate, Date returnDate, int tripDurationInDays, TripType tripType, BigDecimal priceForAdult, BigDecimal priceForKid, Boolean isPromoted, int numberOfSpotsForAdults, int numberOfSpotsForKids) {
