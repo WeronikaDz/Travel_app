@@ -44,6 +44,8 @@ public class ApplicationSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "management/addtrip").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
                         .requestMatchers(HttpMethod.DELETE, "management/deletetrips/{id}").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
                         .requestMatchers(HttpMethod.PUT, "management/updatetrips/{id}").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // tutaj filtrowanie
+                        .requestMatchers( "/h2-console").permitAll() // tutaj filtrowanie
+
                         // todo
 //                        .and()
 //                        .formLogin()
@@ -71,33 +73,6 @@ public class ApplicationSecurityConfig {
         return http.build();
     }
 
-    //zamiast configure mamy securityFilterChain
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests() // deklarujemy że zadania muszą byc autoryzowane
-//                .antMatchers("/", "index") // część naszej białej listy
-//                .permitAll()// kolejna część białej listy
-//                .antMatchers("/api/**").hasRole(USER.name())
-//                .anyRequest() // deklarujemy że każde zadanie
-//                .authenticated() // musi przejść autentykację (klient podaje użytkownika i hasło)
-//                .and()
-//                .httpBasic(); // używamy podstawowej autentykacji
-//    }
-
-    // do wglądu
-//    @Bean
-//    protected UserDetailsService userDetailsService () {
-//        UserDetails adminUser = User.builder()
-//                .username("admin")
-//                .password(passwordEncoder.encode("kochamywwycieczki"))
-//                .authorities(ADMIN.getGrantedAuthorities())
-//                .build();
-//        UserDetails customerUser = User.builder()
-//            .username("customer")
-//            .password(passwordEncoder.encode("bardzochcejechaćnawakacje"))
-//            .authorities(USER.getGrantedAuthorities())
-//            .build();
-//    return new InMemoryUserDetailsManager(adminUser, customerUser);
-//}
     @Bean
     public UserDetailsManager userDetailsManager() {
         return new InMemoryUserDetailsManager();

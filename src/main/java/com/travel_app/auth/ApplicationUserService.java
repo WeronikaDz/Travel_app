@@ -1,29 +1,27 @@
-//package com.travel_app.auth;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.beans.factory.annotation.Qualifier;
-//import org.springframework.security.core.userdetails.UserDetails;
-//import org.springframework.security.core.userdetails.UserDetailsService;
-//import org.springframework.security.core.userdetails.UsernameNotFoundException;
-//import org.springframework.stereotype.Service;
-//
-//@Service
-//public class ApplicationUserService implements UserDetailsService {
-//
-//    private final ApplicationUserDao applicationUserDao;
-//
-//    @Autowired
-//    public ApplicationUserService(@Qualifier("h2:mem:testdb") ApplicationUserDao applicationUserDao) {
-//        this.applicationUserDao = applicationUserDao;
-//    }
-////
-//////    @Override
-//////    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//////        return applicationUserDao
-//////                .selectApplicationUserByUsername(username)
-//////                .orElseThrow(() ->
-//////                        new UsernameNotFoundException(String.format("Username %s not found", username))
-//////                );
-//////    }
-//////
-////}
+package com.travel_app.auth;
+
+import com.travel_app.repository.MySqlApplicationUserDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ApplicationUserService {
+
+    private final MySqlApplicationUserDao mySqlApplicationUserDao;
+
+    @Autowired
+    public ApplicationUserService(MySqlApplicationUserDao mySqlApplicationUserDao) {
+        this.mySqlApplicationUserDao = mySqlApplicationUserDao;
+    }
+
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return mySqlApplicationUserDao
+                .selectApplicationUserByUsername(username)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(String.format("Username %s not found", username))
+                );
+    }
+
+}
