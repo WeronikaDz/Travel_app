@@ -7,7 +7,7 @@ import static com.travel_app.security.ApplicationUserPermission.*;
 
 public enum ApplicationUserRole {
     USER (Set.of(BUY_TRIP)),
-    ADMIN (Set.of(ADD_TRIP, EDIT_TRIP));
+    ADMIN (Set.of(ADD_TRIP, EDIT_TRIP, DELETE_TRIP));
     private final Set<ApplicationUserPermission> permissions;
     ApplicationUserRole (Set<ApplicationUserPermission> permissions) {
         this.permissions = permissions;

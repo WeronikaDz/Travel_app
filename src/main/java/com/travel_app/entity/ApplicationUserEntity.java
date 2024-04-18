@@ -15,7 +15,6 @@ public class ApplicationUserEntity implements UserDetails {
     private long id;
     private String username;
     private String password;
-    //    private final Set<? extends GrantedAuthority> grantedAuthorities;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_authorities",

@@ -2,6 +2,8 @@ package com.travel_app.entity;
 
 import com.travel_app.dtos.TripDTO;
 import jakarta.persistence.*;
+import org.springframework.context.annotation.Bean;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;

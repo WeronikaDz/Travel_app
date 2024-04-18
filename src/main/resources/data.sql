@@ -1,3 +1,19 @@
+insert into users(id, username, password, is_account_non_expired, is_account_non_locked, is_credentials_non_expired, is_enabled)
+values
+    (1, 'Wiktor' ,'$2a$10$uN5rqxJlftstwdHt3bZNH.OiY.eWGrRI9Mnmd7jPhFDQxH2.pRMEW',1,1,1,1),
+    (2, 'Weronika' ,'$2a$10$.G2ab8ena7gqDXEqvn9bWeid1ONr8yhKb9epp9AGi8dDXdCsvLBKS',1,1,1,1),
+    (3, 'Jakub' ,'$2a$10$BMkCbf7VnSYuymv3xhxcte.fPSl0RRrTLxlNYkhB.6/EOHL2.vvsW',1,1,1,1);
+
+insert into authority(id, authority)
+values
+    (1, 'USER'),
+    (2, 'ADMIN');
+insert into  user_authorities(user_id, authority_id)
+values
+    (1, 2),
+    (2, 2),
+    (3, 1);
+
 INSERT INTO continent (continent_name) VALUES ('Europe');
 INSERT INTO continent (continent_name) VALUES ('North America');
 INSERT INTO continent (continent_name) VALUES ('South America');
@@ -95,26 +111,26 @@ INSERT INTO hotel (hotel_name, standard_in_stars, hotel_description, city_id) VA
 INSERT INTO hotel (hotel_name, standard_in_stars, hotel_description, city_id) VALUES ('Ritz-Carlton Riyadh', 5, 'Luxury hotel in Riyadh, Saudi Arabia', 20);
 
 INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Alice', 'Johnson', 28);
-INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Robert', 'Williams', 35);
+INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Robert', 'Williams', 17);
 INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Sophia', 'Brown', 40);
-INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('William', 'Jones', 32);
+INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('William', 'Jones', 16);
 INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Olivia', 'Davis', 27);
-INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('James', 'Miller', 45);
+INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('James', 'Miller', 11);
 INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Evelyn', 'Wilson', 29);
-INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Alexander', 'Taylor', 38);
+INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Alexander', 'Taylor', 8);
 INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Charlotte', 'Anderson', 31);
 INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Daniel', 'Thomas', 33);
-INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Amelia', 'Jackson', 36);
+INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Amelia', 'Jackson', 6);
 INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Mia', 'White', 30);
-INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Benjamin', 'Harris', 39);
+INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Benjamin', 'Harris', 9);
 INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Ava', 'Martinez', 26);
 INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Logan', 'Nelson', 34);
-INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Emma', 'Thompson', 29);
+INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Emma', 'Thompson', 9);
 INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Elijah', 'Moore', 37);
 INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Harper', 'Roberts', 28);
 INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Liam', 'Clark', 31);
-INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Abigail', 'Hill', 35);
-INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Mason', 'Mitchell', 33);
+INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Abigail', 'Hill', 5);
+INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Mason', 'Mitchell', 3);
 INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Emily', 'Perez', 27);
 INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Jacob', 'Walker', 40);
 INSERT INTO traveler (traveler_first_name, traveler_last_name, age) VALUES ('Elizabeth', 'Young', 28);

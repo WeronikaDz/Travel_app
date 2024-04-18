@@ -3,15 +3,12 @@ package com.travel_app.service;
 import com.travel_app.dtos.TripDTO;
 import com.travel_app.entity.Trip;
 import com.travel_app.entity.TripType;
-import com.travel_app.repository.*;
+import com.travel_app.repository.TripRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -20,9 +17,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class TripService {
-
     @PersistenceContext
     private EntityManager entityManager;
+    private final TripRepository tripRepository;
+    public TripService(EntityManager entityManager, TripRepository tripRepository) {
+        this.entityManager = entityManager;
+        this.tripRepository = tripRepository;
+    }
     @Transactional
     public void addTrip(Trip trip) {
         String insertQuery = "INSERT INTO trip (city_id, airport_id, hotel_id, city_from_id, airport_from_id, city_to_id, airport_to_id, hotel_to_id, departure_date, return_date, trip_duration_in_days, trip_type, price_for_adult, price_for_kid, is_promoted, number_of_spots_for_adults, number_of_spots_for_kids) " +
@@ -93,50 +94,15 @@ public class TripService {
                 .executeUpdate();
     }
 
-    private final AirportRepository airportRepository;
-    private final CityRepository cityRepository;
-    private  final ContinentRepository continentRepository;
-    private final CountryRepository countryRepository;
-    private final HotelRepository hotelRepository;
-    private final TravelerRepository travelerRepository;
-    private final TripPurchaseRepository tripPurchaseRepository;
-    private final TripRepository tripRepository;
-
-    public TripService(AirportRepository airportRepository, CityRepository cityRepository, ContinentRepository continentRepository, CountryRepository countryRepository, HotelRepository hotelRepository, TravelerRepository travelerRepository, TripPurchaseRepository tripPurchaseRepository, TripRepository tripRepository) {
-        this.airportRepository = airportRepository;
-        this.cityRepository = cityRepository;
-        this.continentRepository = continentRepository;
-        this.countryRepository = countryRepository;
-        this.hotelRepository = hotelRepository;
-        this.travelerRepository = travelerRepository;
-        this.tripPurchaseRepository = tripPurchaseRepository;
-        this.tripRepository = tripRepository;
-    }
-/*
-    można wyszukiwać wycieczki po (np.):
-    mieście (Lotnisku) wylotu
-    mieście (Hotelu) pobytu
-    dacie wyjazdu (opcjonalnie zakresie)
-    dacie powrotu (opcjonalnie zakresie)
-    typie (BB, HB, FB, AI)
-    standardzie hotelu
-    ilości dni
-    sortować można po (np.):
-    cenie
-    dacie wylotu
-    */
-
-//     metoda wyszukująca po lotnisku wylotu
-
+    //     metoda wyszukująca po lotnisku wylotu
     public List<Trip> findTripsByAirportName(String airportName) {
         return tripRepository.findAll().stream()
                 .filter(trip -> trip.getAirport() != null && trip.getAirport().getAirportName().equals(airportName))
                 .collect(Collectors.toList());
     }
-// metoda wyszukująca po mieście (nazwie Hotelu) pobytu
 
     // metoda wyszukująca po typie (BB, HB, FB, AI)
-    public List <Trip> findTripsByType (TripType tripType) {
+    public List<Trip> findTripsByType(TripType tripType) {
         return tripRepository.findAll().stream()
                 .filter(trip -> trip.getTripType() != null && trip.getTripType().equals(tripType))
                 .collect(Collectors.toList());
@@ -144,40 +110,60 @@ public class TripService {
 
     // metoda wyszukująca po ilości dni
 
-    public List<Trip> findTripsByDurationInDays (int tripDurationInDays) {
+    public List<Trip> findTripsByDurationInDays(int tripDurationInDays) {
         return tripRepository.findAll().stream()
                 .filter(trip -> trip.getTripDurationInDays() != 0 && trip.getTripDurationInDays() == tripDurationInDays)
                 .collect(Collectors.toList());
     }
-    
+
+    // metoda wyszukująca po dacie wylotu
     public List<Trip> findTripsByDepartureDate(LocalDate departureDate) {
         return tripRepository.findAll().stream()
                 .filter(trip -> trip.getDepartureDate() != null && trip.getDepartureDate().equals(departureDate))
                 .collect(Collectors.toList());
     }
 
-    public List<Trip> sortByPriceForAdult (List<Trip> trips) {
+    // metoda wyszukująca po dacie powrotu
+    public List<Trip> findTripsByReturnDate(LocalDate returnDate) {
+        return tripRepository.findAll().stream()
+                .filter(trip -> trip.getReturnDate() != null && trip.getReturnDate().equals(returnDate))
+                .collect(Collectors.toList());
+    }
+
+    // metoda sortująca po cenie dla dorosłego
+    public List<Trip> sortByPriceForAdult(List<Trip> trips) {
         Collections.sort(trips, Comparator.comparing(Trip::getPriceForAdult));
         return trips;
     }
-public List<Trip> findTripsByHotelName(String hotelName) {
-        return tripRepository.findAll().stream()
-                .filter(trip -> trip.getHotel() !=null && trip.getHotel().getHotelName().equals(hotelName))
-                .collect(Collectors.toList());
-}
 
-// metoda wyszukująca po standardzie hotelu
+    // todo napisz testy do nie użytych metod.
+    // metoda sortująca po dacie wylotu
+    public List<Trip> sortByDepartureDate(List<Trip> trips) {
+        Collections.sort(trips, Comparator.comparing(Trip::getDepartureDate));
+        return trips;
+    }
 
-    public List<Trip> findTripsByStandardInStars(int standardInStars) {
+    // metoda wyszukująca po nazwie hotelu
+    public List<Trip> findTripsByHotelName(String hotelName) {
         return tripRepository.findAll().stream()
-                .filter(trip -> trip.getHotel() !=null && trip.getHotel().getStandardInStars() == standardInStars)
+                .filter(trip -> trip.getHotel() != null && trip.getHotel().getHotelName().equals(hotelName))
                 .collect(Collectors.toList());
     }
 
+    // metoda wyszukująca po standardzie hotelu
+    public List<Trip> findTripsByStandardInStars(int standardInStars) {
+        return tripRepository.findAll().stream()
+                .filter(trip -> trip.getHotel() != null && trip.getHotel().getStandardInStars() == standardInStars)
+                .collect(Collectors.toList());
+    }
+
+    // metoda wyszukująca wszystkie wycieczki
     public List<TripDTO> findAll() {
         return tripRepository.findAll().stream()
                 .map(Trip::map).collect(Collectors.toList());
     }
+
+    // metoda usuwająca wycieczkę
     public void deleteTrip(Long tripId) {
         tripRepository.deleteById(tripId);
     }
